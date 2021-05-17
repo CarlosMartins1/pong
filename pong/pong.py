@@ -49,7 +49,7 @@ hud.color('white')
 hud.penup()
 hud.hideturtle()
 hud.goto(0, 260)
-hud.write('0 : 0', align='center', font=('Press Start 2P', 24, 'normal'))
+hud.write('0 : 0', align='center', font=('Arial', 24, 'normal'))
 
 
 def paddle_1_up():
@@ -95,7 +95,8 @@ screen.onkeypress(paddle_1_down, 's')
 screen.onkeypress(paddle_2_up, 'Up')
 screen.onkeypress(paddle_2_down, 'Down')
 
-while True:
+loop = True
+while loop:
     screen.update()
 
     # ball movement
@@ -118,7 +119,7 @@ while True:
     if ball.xcor() < -390:
         score_2 += 1
         hud.clear()
-        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Press Start 2P', 24, 'normal'))
+        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Arial', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
         ball.dx = - 0.2
@@ -130,7 +131,7 @@ while True:
     if ball.xcor() > 390:
         score_1 += 1
         hud.clear()
-        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Press Start 2P', 24, 'normal'))
+        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Arial', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
         ball.dx = 0.2
@@ -151,3 +152,15 @@ while True:
         ball.dx *= -1
         ball.dy = random.uniform(0, ball.dx)
         playsound('bounce.wav')
+
+    if score_1 == 5:
+        screen.clear()
+        screen.update()
+        screen.bgcolor('black')
+        hud.write('Player 1 wins!', align='center', font=('Arial', 24, 'normal'))
+        screen.exitonclick()
+    elif score_2 == 5:
+        screen.clear()
+        screen.bgcolor('black')
+        hud.write('Player 2 wins!', align='center', font=('Arial', 24, 'normal'))
+        screen.exitonclick()
