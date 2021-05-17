@@ -5,7 +5,7 @@ import random
 # draw screen
 screen = turtle.Screen()
 screen.title('My Pong')
-screen.bgcolor('black')
+screen.bgcolor('darkslategray')
 screen.setup(width=800, height=600)
 screen.tracer(0)
 
@@ -48,8 +48,8 @@ hud.shape('square')
 hud.color('white')
 hud.penup()
 hud.hideturtle()
-hud.goto(0, 260)
-hud.write('0 : 0', align='center', font=('Arial', 24, 'normal'))
+hud.goto(0, 250)
+hud.write('0 : 0', align='center', font=('Retro Gaming', 24, 'normal'))
 
 
 def paddle_1_up():
@@ -119,7 +119,7 @@ while loop:
     if ball.xcor() < -390:
         score_2 += 1
         hud.clear()
-        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Arial', 24, 'normal'))
+        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Retro Gaming', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
         ball.dx = - 0.2
@@ -131,7 +131,7 @@ while loop:
     if ball.xcor() > 390:
         score_1 += 1
         hud.clear()
-        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Arial', 24, 'normal'))
+        hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Retro Gaming', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
         ball.dx = 0.2
@@ -140,14 +140,14 @@ while loop:
         paddle_2.goto(350, 0)
 
     # collision with the paddle 1
-    if (-330 > ball.xcor() > -340) and (paddle_1.ycor() + 60 > ball.ycor() > paddle_1.ycor() - 60):
+    if (-330 > ball.xcor() > -340) and (paddle_1.ycor() + 70 > ball.ycor() > paddle_1.ycor() - 70):
         ball.dx -= 0.05
         ball.dx *= -1
         ball.dy = random.uniform(ball.dx, 0)
         playsound('bounce.wav')
 
     # collision with the paddle 2
-    if (330 < ball.xcor() < 340) and (paddle_2.ycor() + 60 > ball.ycor() > paddle_2.ycor() - 60):
+    if (330 < ball.xcor() < 340) and (paddle_2.ycor() + 70 > ball.ycor() > paddle_2.ycor() - 70):
         ball.dx += 0.05
         ball.dx *= -1
         ball.dy = random.uniform(0, ball.dx)
@@ -157,10 +157,12 @@ while loop:
         screen.clear()
         screen.update()
         screen.bgcolor('black')
-        hud.write('Player 1 wins!', align='center', font=('Arial', 24, 'normal'))
+        hud.goto(0, 0)
+        hud.write('Player 1 wins!', align='center', font=('Retro Gaming', 24, 'normal'))
         screen.exitonclick()
     elif score_2 == 5:
         screen.clear()
         screen.bgcolor('black')
-        hud.write('Player 2 wins!', align='center', font=('Arial', 24, 'normal'))
+        hud.goto(0, 0)
+        hud.write('Player 2 wins!', align='center', font=('Retro Gaming', 24, 'normal'))
         screen.exitonclick()
