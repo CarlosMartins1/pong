@@ -1,5 +1,6 @@
 import turtle
 from playsound import playsound
+import random
 
 # draw screen
 screen = turtle.Screen()
@@ -33,8 +34,8 @@ ball.shape('square')
 ball.color('white')
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = 0.1
+ball.dx = - 0.2
+ball.dy = 0
 
 # score
 score_1 = 0
@@ -120,7 +121,10 @@ while True:
         hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Press Start 2P', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
-        ball.dx *= -1
+        ball.dx = - 0.2
+        ball.dy = 0
+        paddle_1.goto(-350, 0)
+        paddle_2.goto(350, 0)
 
     # collision with right wall
     if ball.xcor() > 390:
@@ -129,14 +133,21 @@ while True:
         hud.write('{} : {}'.format(score_1, score_2), align='center', font=('Press Start 2P', 24, 'normal'))
         playsound('arcade_bleep_sound.wav')
         ball.goto(0, 0)
-        ball.dx *= -1
+        ball.dx = 0.2
+        ball.dy = 0
+        paddle_1.goto(-350, 0)
+        paddle_2.goto(350, 0)
 
     # collision with the paddle 1
     if (-330 > ball.xcor() > -340) and (paddle_1.ycor() + 60 > ball.ycor() > paddle_1.ycor() - 60):
+        ball.dx -= 0.05
         ball.dx *= -1
+        ball.dy = random.uniform(ball.dx, 0)
         playsound('bounce.wav')
 
     # collision with the paddle 2
     if (330 < ball.xcor() < 340) and (paddle_2.ycor() + 60 > ball.ycor() > paddle_2.ycor() - 60):
+        ball.dx += 0.05
         ball.dx *= -1
+        ball.dy = random.uniform(0, ball.dx)
         playsound('bounce.wav')
